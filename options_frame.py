@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QFrame, QVBoxLayout, QLabel, QSpinBox, QPushButton
+from PyQt6.QtWidgets import *
 import random
 
 
@@ -6,14 +6,13 @@ class OptionsFrame(QFrame):
     def __init__(self):
         super().__init__()
 
-        self.shift_box = QSpinBox()
-        self.shift_box.setRange(-100, 100)
+        self.key_field = QTextEdit()
 
         self.random_btn = QPushButton("Сгенерировать рандомный ключ")
 
         layout = QVBoxLayout()
         layout.addWidget(QLabel("Ключ:"))
-        layout.addWidget(self.shift_box)
+        layout.addWidget(self.key_field)
         layout.addWidget(self.random_btn)
 
         self.setLayout(layout)
@@ -21,8 +20,8 @@ class OptionsFrame(QFrame):
         self.random_btn.clicked.connect(self.generate_random)
 
     def generate_random(self):
-        value = random.randint(-25, 25)
-        self.shift_box.setValue(value)
+        s = ''
+        for i in range(random.randint(3, 50)):
+            s += chr(random.randint(40, 176))
+        self.key_field.setText(s)
 
-    def get_shift(self) -> int:
-        return self.shift_box.value()

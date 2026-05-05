@@ -21,7 +21,7 @@ class CipherApp(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        self.setWindowTitle("Шифрователь Цезаря")
+        self.setWindowTitle("Шифр Вернама")
 
         layout = QVBoxLayout()
 
@@ -31,8 +31,7 @@ class CipherApp(QWidget):
 
         self.options = OptionsFrame()
 
-        self.encrypt_btn = QPushButton("Зашифровать")
-        self.decrypt_btn = QPushButton("Дешифровать")
+        self.encrypt_btn = QPushButton("Зашифровать / Дешифровать")
 
         layout.addWidget(QLabel("Поле ввода:"))
         layout.addWidget(self.input_text)
@@ -41,7 +40,6 @@ class CipherApp(QWidget):
 
         btn_layout = QHBoxLayout()
         btn_layout.addWidget(self.encrypt_btn)
-        btn_layout.addWidget(self.decrypt_btn)
         layout.addLayout(btn_layout)
 
         layout.addWidget(QLabel("Поле вывода:"))
@@ -50,18 +48,11 @@ class CipherApp(QWidget):
         self.setLayout(layout)
 
         self.encrypt_btn.clicked.connect(self.handle_encrypt)
-        self.decrypt_btn.clicked.connect(self.handle_decrypt)
 
     def handle_encrypt(self):
         self.model.set_text(self.input_text.toPlainText())
-        result = self.controller.encrypt(self.options.get_shift())
+        result = self.controller.encrypt(self.options.key_field.toPlainText())
         self.output_text.setPlainText(result)
-
-    def handle_decrypt(self):
-        self.model.set_text(self.input_text.toPlainText())
-        result = self.controller.decrypt(self.options.get_shift())
-        self.output_text.setPlainText(result)
-
 
 # ===================== Точка входа =====================
 def main():

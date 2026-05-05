@@ -3,7 +3,7 @@ class Cipher:
         raise NotImplementedError()
 
 
-class CaesarCipher(Cipher):
+class VernamCypher(Cipher):
     def process(self, text, key):
         result = []
         key_len = len(key)

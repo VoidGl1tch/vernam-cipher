@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
     QTextEdit, QPushButton, QHBoxLayout
 )
 
-from cipher import VernamCypher
+from cipher import VernamCipher
 from model import TextModel
 from controller import CipherController
 from options_frame import OptionsFrame
@@ -15,7 +15,7 @@ class CipherApp(QWidget):
         super().__init__()
 
         self.model = TextModel()
-        self.cipher = VernamCypher()
+        self.cipher = VernamCipher()
         self.controller = CipherController(self.cipher, self.model)
 
         self.init_ui()
